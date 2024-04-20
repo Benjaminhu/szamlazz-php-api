@@ -1,0 +1,20 @@
+{
+    "name": "benjaminhu/szamlazz-php-api",
+    "description": "[Unofficial] Számlázz.hu - Számla Agent PHP API",
+    "type": "library",
+    "keywords": [
+        "szamla",
+        "szamlazz",
+        "szamlazz.hu",
+        "invoice",
+        "szamla agent"
+    ],
+    "require": {
+        "php" : ">=5.6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SzamlaAgent\\": "szamlaagent/src/SzamlaAgent/"
+        }
+    }
+}
