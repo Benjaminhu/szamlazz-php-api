@@ -8,7 +8,7 @@ Nem szeretném a projektbe "másolni" ezt a külső függőséget, viszont Compo
 
 ## Hogyan?
 
-Szinte változatlanul, azért szinte, mert a PSR-4 kombatibilitás miatt a könyvtárneveket meg kell változtatni. Erre készült egy egyszerű PHP script ami az egészet elvégzi: `szamla-agent-update.php` ([szamla-agent-update.php](./szamla-agent-update.php)) és frissíti ha új verzió jönne ki. Kimenete pl:
+Szinte változatlanul, azért szinte, mert a PSR-4 kompatibilitás miatt a könyvtárneveket meg kell változtatni. Erre készült egy egyszerű PHP script ami az egészet elvégzi: `szamla-agent-update.php` ([szamla-agent-update.php](./szamla-agent-update.php)) és frissíti ha új verzió jönne ki. Kimenete pl:
 
 ```shell
 # php szamla-agent-update.php 
