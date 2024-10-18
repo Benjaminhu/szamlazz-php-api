@@ -33,7 +33,7 @@ DONE
 
 ## PHP verzió
 
-A `SzamlaAgent_PHP_API_v2.10.pdf` ([SzamlaAgent_PHP_API_v2.10.pdf](./szamlaagent/docs/SzamlaAgent_PHP_API_v2.10.pdf)) doksiból: 
+A `SzamlaAgent_PHP_API_v2.10.pdf` ([SzamlaAgent_PHP_API_v2.10.pdf](/blob/2.10.18/szamlaagent/docs/SzamlaAgent_PHP_API_v2.10.pdf)) doksiból: 
 
 > A Számla Agent PHP API használatához szükséges minimum PHP verzió: 5.6.0.
 
