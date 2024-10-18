@@ -36,3 +36,31 @@ DONE
 A `SzamlaAgent_PHP_API_v2.10.pdf` ([SzamlaAgent_PHP_API_v2.10.pdf](./szamlaagent/docs/SzamlaAgent_PHP_API_v2.10.pdf)) doksiból: 
 
 > A Számla Agent PHP API használatához szükséges minimum PHP verzió: 5.6.0.
+
+## Alternatív composer-es beállítás
+
+Az alábbi megoldási javaslatot **@szepeviktor** küldte ([Issue #1](https://github.com/Benjaminhu/szamlazz-php-api/issues/1)), köszönet érte! A projektünkben lévő `composer.json`-ben megadható az alábbi kiegészítéssel a zip file hivatkozás ([vonatkozó composer dokumentáció "Package"](https://getcomposer.org/doc/05-repositories.md#package-2)).
+
+```json
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "szamlazzhu/php-sdk",
+                "version": "2.10.19",
+                "dist": {
+                    "url": "https://docs.szamlazz.hu/assets/files/PHPApiAgent-2.10.19-ae230e82fc3b1443195e91441a4f20c8.zip",
+                    "type": "zip"
+                },
+                "autoload": {
+                    "classmap": [
+                        "src/szamlaagent/"
+                    ]
+                }
+            }
+        }
+    ],
+    "require": {
+        "szamlazzhu/php-sdk": "^2.10"
+    }
+```
