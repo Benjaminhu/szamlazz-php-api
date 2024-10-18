@@ -1,22 +1,36 @@
 <?php
 
+$linkPage = 'https://docs.szamlazz.hu/php';
+
 $zipBaseDir = './szamlaagent';
 
 echo 'Hivatalos dokumentacio letoltese es `PHPApiAgent-X.Y.Z.zip` letoltes link kiszedese...' . PHP_EOL;
-$content = file_get_contents('https://docs.szamlazz.hu/');
+$content = file_get_contents($linkPage);
 $matches = [];
-preg_match('!(?P<php_api_zip>https://www.szamlazz.hu/phpapi/.*?zip)!', $content, $matches);
+
+preg_match('!"(?P<php_api_zip>[^"]+PHPApiAgent[^"]+zip)"!i', $content, $matches);
 
 // minimal check
 if (!array_key_exists('php_api_zip', $matches) || empty($matches['php_api_zip'])) {
     die(PHP_EOL . 'Nem talalhato letoltheto .zip hivatkozas az oldalon!' . PHP_EOL);
 }
 
-$urlPathData = parse_url($matches['php_api_zip'], PHP_URL_PATH);
-$fileName = pathinfo($urlPathData, PATHINFO_BASENAME);
+$urlPathData = parse_url($matches['php_api_zip']);
+$fileName = pathinfo($urlPathData['path'], PATHINFO_BASENAME);
+
 echo sprintf('URL to filename: `%s` -> `%s`', $matches['php_api_zip'], $fileName) . PHP_EOL;
 
-file_put_contents($fileName, file_get_contents($matches['php_api_zip']));
+$libFullUrl = $matches['php_api_zip'];
+if (!array_key_exists('host', $urlPathData)) {
+    $linkPagePathData = parse_url($linkPage);
+    $libFullUrl = sprintf('%s://%s%s',
+        $linkPagePathData['scheme'],
+        $linkPagePathData['host'],
+        $matches['php_api_zip']
+    );
+}
+
+file_put_contents($fileName, file_get_contents($libFullUrl));
 echo sprintf('Saved to local: `%s`', $fileName) . PHP_EOL;
 
 // meglevo `szamlaagent` torlese
