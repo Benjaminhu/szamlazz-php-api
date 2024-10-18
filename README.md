@@ -13,10 +13,10 @@ Szinte változatlanul, azért szinte, mert a PSR-4 kompatibilitás miatt a köny
 ```shell
 # php szamla-agent-update.php 
 Hivatalos dokumentacio letoltese es `PHPApiAgent-X.Y.Z.zip` letoltes link kiszedese...
-URL to filename: `https://www.szamlazz.hu/phpapi/PHPApiAgent-2.10.18.zip` -> `PHPApiAgent-2.10.18.zip`
-Saved to local: `PHPApiAgent-2.10.18.zip`
+URL to filename: `/assets/files/PHPApiAgent-2.10.19-ae230e82fc3b1443195e91441a4f20c8.zip` -> `PHPApiAgent-2.10.19-ae230e82fc3b1443195e91441a4f20c8.zip`
+Saved to local: `PHPApiAgent-2.10.19-ae230e82fc3b1443195e91441a4f20c8.zip`
 Regi `./szamlaagent` konyvtar torlese
-Kicsomagolas: `PHPApiAgent-2.10.18.zip`
+Kicsomagolas: `PHPApiAgent-2.10.19-ae230e82fc3b1443195e91441a4f20c8.zip`
 PSR-4 konyvtarnev javitasok:
 ./szamlaagent/src/szamlaagent -> ./szamlaagent/src/SzamlaAgent
 ./szamlaagent/src/SzamlaAgent/waybill -> ./szamlaagent/src/SzamlaAgent/Waybill

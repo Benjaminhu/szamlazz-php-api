@@ -223,9 +223,9 @@ class InvoiceHeader extends DocumentHeader {
      *
      * @throws SzamlaAgentException
      */
-    function __construct($type = Invoice::INVOICE_TYPE_P_INVOICE) {
+    function __construct($type = Invoice::INVOICE_TYPE_P_INVOICE, $isReverseInvoice = false) {
         if (!empty($type)) {
-            $this->setDefaultData($type);
+            $this->setDefaultData($type, $isReverseInvoice);
         }
     }
 
@@ -237,7 +237,7 @@ class InvoiceHeader extends DocumentHeader {
      * @throws SzamlaAgentException
      * @throws \Exception
      */
-    function setDefaultData($type) {
+    function setDefaultData($type, $isReverseInvoice) {
         // A bizonylat számla típusú
         $this->setInvoice(true);
         // Számla típusa (papír vagy e-számla)
@@ -250,8 +250,8 @@ class InvoiceHeader extends DocumentHeader {
         $this->setCurrency(Document::getDefaultCurrency());
         // Számla nyelve
         $this->setLanguage(Document::getDefaultLanguage());
-        // Számla teljesítés dátuma
-        $this->setFulfillment(SzamlaAgentUtil::getTodayStr());
+        // Sztornó számla esetén alapértelmezetten nincs beállítva, így a rendszer a sztornózott számla teljesítési dátumát fogja beállítani a számla kiállításánál
+        $this->setFulfillment(!$isReverseInvoice ? SzamlaAgentUtil::getTodayStr() : null);
         // Számla fizetési határideje
         $this->setPaymentDue(SzamlaAgentUtil::addDaysToDate(SzamlaAgentUtil::DEFAULT_ADDED_DAYS));
     }

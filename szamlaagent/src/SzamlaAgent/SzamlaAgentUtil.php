@@ -342,6 +342,31 @@ class SzamlaAgentUtil {
     }
 
     /**
+     * @param $value
+     *
+     * @return int
+     * @throws SzamlaAgentException
+     */
+    public static function nonNegativeInteger($value) {
+        if (is_string($value) && ctype_digit($value)) {
+            $value = intval($value);
+        }
+
+        if (is_double($value)) {
+            $value = (int)floor($value);
+        }
+
+        if (is_int($value)) {
+            if ($value < 0) {
+                $value = 0;
+            }
+        } else {
+            Log::writeLog("Helytelen típus! Integer helyett " . gettype($value) . " típus ennél az értéknél: " . $value, Log::LOG_LEVEL_WARN);
+        }
+        return $value;
+    }
+
+    /**
      * @param string $value
      *
      * @return bool

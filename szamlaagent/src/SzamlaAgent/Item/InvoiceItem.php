@@ -67,6 +67,11 @@ class InvoiceItem extends Item {
         if (SzamlaAgentUtil::isNotNull($this->getLedgerData())) {
             $data['tetelFokonyv']     = $this->getLedgerData()->buildXmlData();
         }
+
+        if (SzamlaAgentUtil::isNotNull($this->getDataDeletionCode())) {
+            $data['torloKod'] = SzamlaAgentUtil::nonNegativeInteger($this->getDataDeletionCode());
+        }
+
         return $data;
     }
 

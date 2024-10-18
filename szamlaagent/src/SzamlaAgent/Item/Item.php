@@ -222,6 +222,12 @@ class Item {
     protected $comment;
 
     /**
+     * Hány adattörlő kódot kérünk
+     * @var int
+     */
+    protected $dataDeletionCode;
+
+    /**
      * Kötelezően kitöltendő mezők
      *
      * @var array
@@ -279,6 +285,9 @@ class Item {
                 case 'vat':
                 case 'comment':
                     SzamlaAgentUtil::checkStrField($field, $value, $required, __CLASS__);
+                    break;
+                case 'dataDeletionCode':
+                    SzamlaAgentUtil::checkIntField($field, $value, $required, __CLASS__);
                     break;
             }
         }
@@ -422,4 +431,21 @@ class Item {
     public function setGrossAmount($grossAmount) {
         $this->grossAmount = (float)$grossAmount;
     }
+
+    /**
+     * @return int
+     */
+    public function getDataDeletionCode()
+    {
+        return $this->dataDeletionCode;
+    }
+
+    /**
+     * @param int $dataDeletionCode
+     */
+    public function setDataDeletionCode($dataDeletionCode)
+    {
+        $this->dataDeletionCode = $dataDeletionCode;
+    }
+
  }

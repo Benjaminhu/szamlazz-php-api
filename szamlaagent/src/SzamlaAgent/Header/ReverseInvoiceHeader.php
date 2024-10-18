@@ -28,7 +28,7 @@ class ReverseInvoiceHeader extends InvoiceHeader {
      * @throws SzamlaAgentException
      */
     function __construct($type = Invoice::INVOICE_TYPE_P_INVOICE) {
-        parent::__construct($type);
+        parent::__construct($type, true);
         $this->setReserveInvoice(true);
     }
 

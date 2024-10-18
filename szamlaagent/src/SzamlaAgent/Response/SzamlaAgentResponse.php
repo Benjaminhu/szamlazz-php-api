@@ -273,35 +273,38 @@ class SzamlaAgentResponse {
     }
 
     /**
-     * Visszaadja a PDF fájl nevét
+     * Visszaadja a PDF fájl nevét, amennyiben a PDF file-ok mentése be van kapcsolva
      *
      * @param bool $withPath
      *
-     * @return bool|string
+     * @return string
      */
     public function getPdfFileName($withPath = true) {
-        $header = $this->getAgent()->getRequestEntityHeader();
+        $fileName = null;
+        if ($this->getAgent()->isPdfFileSave()) {
+            $header = $this->getAgent()->getRequestEntityHeader();
 
-        if ($header instanceof InvoiceHeader && $header->isPreviewPdf()) {
-            $entity = $this->getAgent()->getRequestEntity();
+            if ($header instanceof InvoiceHeader && $header->isPreviewPdf()) {
+                $entity = $this->getAgent()->getRequestEntity();
 
-            $name = '';
-            if ($entity != null && $entity instanceof Invoice) {
-                try {
-                    $name .= (new \ReflectionClass($entity))->getShortName() . '-';
-                } catch (\ReflectionException $e) {}
+                $name = '';
+                if ($entity != null && $entity instanceof Invoice) {
+                    try {
+                        $name .= (new \ReflectionClass($entity))->getShortName() . '-';
+                    } catch (\ReflectionException $e) {}
+                }
+                $documentNumber = strtolower($name) . 'preview-' . SzamlaAgentUtil::getDateTimeWithMilliseconds();
+            } else {
+                $documentNumber = $this->getDocumentNumber();
             }
-            $documentNumber = strtolower($name) . 'preview-' . SzamlaAgentUtil::getDateTimeWithMilliseconds();
-        } else {
-            $documentNumber = $this->getDocumentNumber();
-        }
 
-        if ($withPath) {
-            return $this->getPdfFileAbsPath($documentNumber . '.pdf');
-        } else {
-            return $documentNumber . '.pdf';
+            if ($withPath) {
+                $fileName = $this->getPdfFileAbsPath($documentNumber . '.pdf');
+            } else {
+                $fileName = $documentNumber . '.pdf';
+            }
         }
-
+        return $fileName;
     }
 
     /**

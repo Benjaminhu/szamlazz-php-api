@@ -36,6 +36,7 @@ class SzamlaAgentException extends \Exception {
     const INVOICE_EXTERNAL_ID_IS_EMPTY           = 'A külső számlaazonosító üres';
     const CONNECTION_ERROR                       = 'Sikertelen kapcsolódás';
     const XML_FILE_SAVE_FAILED                   = 'XML fálj mentése sikertelen';
+    const MISSING_CERTIFICATION_FILE             = 'A megadott certifikációs fájl nem létezik';
 
     /**
      * Számla Agent egyedi kivétel létrehozása

@@ -164,6 +164,13 @@ class SzamlaAgent {
     private $cookieHandler;
 
     /**
+     * Tanúsítvány
+     *
+     * @var string
+     */
+    private $certificationFilePath;
+
+    /**
      * Számla Agent létrehozása
      *
      * @param string $username     e-mail cím vagy bejelentkezési név
@@ -1194,5 +1201,36 @@ class SzamlaAgent {
      */
     protected function setCookieHandler($cookieHandler) {
         $this->cookieHandler = $cookieHandler;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCertificationFilePath() {
+        return $this->certificationFilePath;
+    }
+
+    /**
+     * @param string $certification
+     */
+    public function setCertificationFilePath($certificationFilePath) {
+        $this->certificationFilePath = $certificationFilePath;
+    }
+
+    /**
+     * Visszaadja, hogy lett-e beállítva külön certifikáció
+     * Ha a beállított fájl nem létezik kivételt dob
+     * @return bool
+     * @throws SzamlaAgentException
+     */
+    public function hasCertification() {
+        if (SzamlaAgentUtil::isNotBlank($this->getCertificationFilePath())) {
+            if (file_exists($this->getCertificationFilePath())) {
+                return true;
+            } else {
+                throw new SzamlaAgentException(SzamlaAgentException::MISSING_CERTIFICATION_FILE);
+            }
+        }
+        return false;
     }
 }
