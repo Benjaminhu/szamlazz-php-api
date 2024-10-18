@@ -1,6 +1,6 @@
 # [Unofficial] Számlázz.hu - Számla Agent PHP API
 
-**Nem hivatalos kiadás**, a hivatalos verzió itt érhető el: https://docs.szamlazz.hu/#php-api
+**Nem hivatalos kiadás**, a hivatalos verzió itt érhető el: https://docs.szamlazz.hu/php
 
 ## Akkor miért?
 
