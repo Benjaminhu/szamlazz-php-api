@@ -109,6 +109,13 @@ class SzamlaAgentResponse {
      */
     private $xmlSchemaType;
 
+    /**
+     * Mentett PDF fálj neve
+     *
+     * @var string
+     */
+    private $previewFileName;
+
 
     /**
      * Számla Agent válasz létrehozása
@@ -280,31 +287,31 @@ class SzamlaAgentResponse {
      * @return string
      */
     public function getPdfFileName($withPath = true) {
-        $fileName = null;
-        if ($this->getAgent()->isPdfFileSave()) {
-            $header = $this->getAgent()->getRequestEntityHeader();
+        $header = $this->getAgent()->getRequestEntityHeader();
 
-            if ($header instanceof InvoiceHeader && $header->isPreviewPdf()) {
+        if ($header instanceof InvoiceHeader && $header->isPreviewPdf()) {
+
+            if (SzamlaAgentUtil::isBlank($this->getPreviewFileName())) {
                 $entity = $this->getAgent()->getRequestEntity();
-
                 $name = '';
                 if ($entity != null && $entity instanceof Invoice) {
                     try {
                         $name .= (new \ReflectionClass($entity))->getShortName() . '-';
                     } catch (\ReflectionException $e) {}
                 }
-                $documentNumber = strtolower($name) . 'preview-' . SzamlaAgentUtil::getDateTimeWithMilliseconds();
-            } else {
-                $documentNumber = $this->getDocumentNumber();
+                $this->setPreviewFileName(strtolower($name) . 'preview-' . SzamlaAgentUtil::getDateTimeWithMilliseconds());
             }
 
-            if ($withPath) {
-                $fileName = $this->getPdfFileAbsPath($documentNumber . '.pdf');
-            } else {
-                $fileName = $documentNumber . '.pdf';
-            }
+            $documentNumber = $this->getPreviewFileName();
+        } else {
+            $documentNumber = $this->getDocumentNumber();
         }
-        return $fileName;
+
+        if ($withPath) {
+            return $this->getPdfFileAbsPath($documentNumber . '.pdf');
+        } else {
+            return $documentNumber . '.pdf';
+        }
     }
 
     /**
@@ -803,6 +810,14 @@ class SzamlaAgentResponse {
      */
     public function getCookieSessionId() {
         return $this->agent->getCookieSessionId();
+    }
+
+    public function getPreviewFileName() {
+        return $this->previewFileName;
+    }
+
+    public function setPreviewFileName(string $previewFileName) {
+        $this->previewFileName = $previewFileName;
     }
 
 }

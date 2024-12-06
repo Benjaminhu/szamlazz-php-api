@@ -26,7 +26,7 @@ class SzamlaAgent {
     /**
      * Számla Agent API aktuális verzió
      */
-    const API_VERSION = '2.10.18';
+    const API_VERSION = '2.10.20';
 
     /**
      * Számla Agent API url

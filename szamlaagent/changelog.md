@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.10.20] - 2024.11.20
+
+### Fixed
+
+- SzamlaAgentResponse getPdfFileName bugfix for preview mode
+  - src/szamlaagent/SzamlaAgentResponse.php 
+
 ## [2.10.19] - 2024.10.16
 
 ### Changed
