@@ -50,8 +50,8 @@ function delTreeRecursive($dir): bool
 }
 if (is_dir($zipBaseDir)) {
     delTreeRecursive($zipBaseDir);
+    echo sprintf('Regi `%s` konyvtar torlese', $zipBaseDir) . PHP_EOL;
 }
-echo sprintf('Regi `%s` konyvtar torlese', $zipBaseDir) . PHP_EOL;
 
 echo sprintf('Kicsomagolas: `%s`', $fileName) . PHP_EOL;
 $zip = new ZipArchive;
@@ -59,8 +59,13 @@ $res = $zip->open($fileName);
 if (TRUE !== $res) {
     die(PHP_EOL . 'ZIP megnyitasi hiba!' . PHP_EOL);
 }
+$directoryInTheZip = sprintf('./%s', basename($zip->statIndex(0)['name']));
 $zip->extractTo('./');
 $zip->close();
+
+if ($directoryInTheZip !== $zipBaseDir) {
+    rename($directoryInTheZip, $zipBaseDir);
+}
 
 // `PHPApiAgent-X.Y.Z.zip` torlese
 unlink($fileName);
