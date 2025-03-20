@@ -26,7 +26,7 @@ class SzamlaAgent {
     /**
      * Számla Agent API aktuális verzió
      */
-    const API_VERSION = '2.10.20';
+    const API_VERSION = '2.10.21';
 
     /**
      * Számla Agent API url
@@ -98,6 +98,13 @@ class SzamlaAgent {
      * @var int
      */
     private $requestTimeout = SzamlaAgentRequest::REQUEST_TIMEOUT;
+
+    /**
+     * Agent kapcsolódáshoz alkalmazott timeout
+     *
+     * @var int
+     */
+    private $requestConnectTimeout = 0;
 
     /**
      * Az aktuális Agent válasz
@@ -1232,5 +1239,21 @@ class SzamlaAgent {
             }
         }
         return false;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRequestConnectTimeout() {
+        return $this->requestConnectTimeout;
+    }
+
+    /**
+     * Negatív értéket nem vehet fel
+     * @param int $requestConnectTimeout
+     * @return void
+     */
+    public function setRequestConnectTimeout($requestConnectTimeout) {
+        $this->requestConnectTimeout = max($requestConnectTimeout, 0);
     }
 }

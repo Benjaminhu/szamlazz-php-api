@@ -184,6 +184,13 @@ class SzamlaAgentRequest {
     private $requestTimeout;
 
     /**
+     * Agent kapcsolódáshoz alkalmazott timeout
+     *
+     * @var int
+     */
+    private $requestConnectionTimeout;
+
+    /**
      * @var CookieHandler
      */
     private $cookieHandler;
@@ -201,6 +208,7 @@ class SzamlaAgentRequest {
         $this->setEntity($entity);
         $this->setCData(true);
         $this->setRequestTimeout($agent->getRequestTimeout());
+        $this->setRequestConnectionTimeout($agent->getRequestConnectTimeout());
     }
 
     /**
@@ -542,6 +550,9 @@ class SzamlaAgentRequest {
 
             curl_setopt($ch, CURLOPT_POSTFIELDS, $postFields);
             curl_setopt($ch, CURLOPT_TIMEOUT, $this->getRequestTimeout());
+            if ($this->getRequestConnectionTimeout() != 0) {
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->getRequestConnectionTimeout());
+            }
 
             $agent->writeLog("CURL adatok elküldése elkezdődött: " . $this->getPostFields(), Log::LOG_LEVEL_DEBUG);
             $result = curl_exec($ch);
@@ -843,6 +854,16 @@ class SzamlaAgentRequest {
      */
     private function setRequestTimeout($timeout) {
         $this->requestTimeout = $timeout;
+    }
+
+    private function getRequestConnectionTimeout()
+    {
+        return $this->requestConnectionTimeout;
+    }
+
+    private function setRequestConnectionTimeout($requestConnectionTimeout)
+    {
+        $this->requestConnectionTimeout = abs($requestConnectionTimeout);
     }
 
     /**

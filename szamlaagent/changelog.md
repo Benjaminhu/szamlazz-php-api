@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.10.21] - 2025.03.14
+
+### Added
+
+- added function: set curl connection timeout (CURLOPT_CONNECTTIMEOUT)
+  - src/szamlaagent/SzamlaAgent.php
+    - getRequestConnectTimeout - get curl connection timeout
+    - setRequestConnectTimeout - set curl connection timeout
+````
+    $agent = SzamlaAgentAPI::create('agentApiKey');
+    ...
+    $agent->setRequestConnectTimeout(10);
+````
 ## [2.10.20] - 2024.11.20
 
 ### Fixed
