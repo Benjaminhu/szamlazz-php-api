@@ -45,7 +45,7 @@ class SzamlaAgentException extends \Exception {
      * @param int        $code
      * @param \Exception $previous
      */
-    public function __construct($message, $code = 0, \Exception $previous = null) {
+    public function __construct($message, $code = 0, ?\Throwable $previous = null) {
         parent::__construct($message, $code, $previous);
     }
 
