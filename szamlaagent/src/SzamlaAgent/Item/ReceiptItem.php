@@ -57,7 +57,7 @@ class ReceiptItem extends Item {
         $data['mennyiseg']        = SzamlaAgentUtil::doubleFormat($this->getQuantity());
         $data['mennyisegiEgyseg'] = $this->getQuantityUnit();
         $data['nettoEgysegar']    = SzamlaAgentUtil::doubleFormat($this->getNetUnitPrice());
-        $data['afakulcs']         = $this->getVat();
+        $data['afakulcs']         = SzamlaAgentUtil::dotCheck($this->getVat());
         $data['netto']            = SzamlaAgentUtil::doubleFormat($this->getNetPrice());
         $data['afa']              = SzamlaAgentUtil::doubleFormat($this->getVatAmount());
         $data['brutto']           = SzamlaAgentUtil::doubleFormat($this->getGrossAmount());
@@ -104,6 +104,4 @@ class ReceiptItem extends Item {
     public function setComment($comment) {
         $this->comment = $comment;
     }
-
-
  }

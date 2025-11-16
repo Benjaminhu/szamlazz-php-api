@@ -58,11 +58,6 @@ class Item {
     const VAT_TAHK = 'TAHK';
 
     /**
-     * Áfakulcs: áfakörön kívüli
-     */
-    const VAT_TEHK = 'TEHK';
-
-    /**
      * Áfakulcs: EU-n belüli termék értékesítés
      */
     const VAT_EUT = 'EUT';

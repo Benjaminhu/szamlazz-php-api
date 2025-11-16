@@ -656,4 +656,11 @@ class SzamlaAgentUtil {
         }
     }
 
+    public static function dotCheck($value) {
+        if (strpos($value, ',') !== false) {
+            $value = str_replace(',', '.', $value);
+        }
+        return $value;
+    }
+
 }

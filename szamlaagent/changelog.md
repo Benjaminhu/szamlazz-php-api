@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.10.22] - 2025.11.13
+
+### Added
+
+- added function: dot check
+    - src/szamlaagent/SzamlaAgentUtil.php
+        - dotCheck - replace comma with dots
+- the VAT rate can also be entered with a comma
+    - src/szamlaagent/item/Item.php
+- remove constans VAT_TEHK 
+    - src/szamlaagent/item/Item.php
+
 ## [2.10.21] - 2025.03.14
 
 ### Added
