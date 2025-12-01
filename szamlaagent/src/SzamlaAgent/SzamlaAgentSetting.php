@@ -349,7 +349,7 @@ class SzamlaAgentSetting {
                 $data = $this->buildFieldsData($request, array_merge($settings, ['szamlaszam', 'adoszam', 'additiv', 'aggregator', 'valaszVerzio']));
                 break;
             case $request::XML_SCHEMA_REQUEST_INVOICE_XML:
-                $data = $this->buildFieldsData($request, array_merge($settings, ['szamlaszam', 'rendelesSzam', 'pdf']));
+                $data = $this->buildFieldsData($request, array_merge($settings, ['szamlaszam', 'rendelesSzam', 'pdf', 'szamlaKulsoAzon']));
                 break;
             case $request::XML_SCHEMA_REQUEST_INVOICE_PDF:
                 $data = $this->buildFieldsData($request, array_merge($settings, ['szamlaszam', 'rendelesSzam', 'valaszVerzio', 'szamlaKulsoAzon']));

@@ -289,7 +289,7 @@ class SzamlaAgentRequest {
      * @throws \ReflectionException
      */
     private function createXmlFile(\DOMDocument $xml) {
-        $fileName = SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getEntity());
+        $fileName = SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getAgent(), $this->getEntity());
         $xmlSaved = $xml->save($fileName);
 
         if (!$xmlSaved) {
@@ -491,7 +491,7 @@ class SzamlaAgentRequest {
                 $xmlFile = new \CURLFile($this->getXmlFilePath(), $mimeType, basename($this->getXmlFilePath()));
             } else {
                 $xmlContent = 'data://application/octet-stream;base64,' . base64_encode($this->getXmlData());
-                $fileName = SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getEntity());
+                $fileName = SzamlaAgentUtil::getXmlFileName('request', $this->getXmlName(), $this->getAgent(), $this->getEntity());
                 $xmlFile = new \CURLFile($xmlContent, $mimeType, basename($fileName));
             }
 

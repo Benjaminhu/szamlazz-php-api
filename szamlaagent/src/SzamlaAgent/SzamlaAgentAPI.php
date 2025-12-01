@@ -23,18 +23,22 @@ class SzamlaAgentAPI extends SzamlaAgent {
      * @return SzamlaAgent
      * @throws SzamlaAgentException
      */
-    public static function create($apiKey, $downloadPdf = true, $logLevel = Log::LOG_LEVEL_DEBUG, $responseType = SzamlaAgentResponse::RESULT_AS_TEXT, $aggregator = '') {
-        $index = self::getHash($apiKey);
+    public static function create($apiKey, $downloadPdf = true, $logLevel = Log::LOG_LEVEL_DEBUG, $responseType = SzamlaAgentResponse::RESULT_AS_TEXT, $aggregator = '', $singleton = true) {
 
         $agent = null;
-        if (isset(self::$agents[$index])) {
-            $agent = self::$agents[$index];
-        }
 
-        if ($agent === null) {
-            return self::$agents[$index] = new self(null, null, $apiKey, $downloadPdf, $logLevel, $responseType, $aggregator);
+        if ($singleton) {
+            $index = self::getHash($apiKey);
+            if (isset(self::$agents[$index])) {
+                $agent = self::$agents[$index];
+            } else {
+                $agent = new self(null, null, $apiKey, $downloadPdf, $logLevel, $responseType, $aggregator);
+                self::$agents[$index] = $agent;
+            }
         } else {
-            return $agent;
+            $agent =  new self(null, null, $apiKey, $downloadPdf, $logLevel, $responseType, $aggregator);
+            $agent->setSingleton($singleton);
         }
+        return $agent;
     }
 }

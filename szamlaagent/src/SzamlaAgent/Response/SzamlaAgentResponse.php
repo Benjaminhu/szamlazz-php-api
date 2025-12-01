@@ -270,7 +270,7 @@ class SzamlaAgentResponse {
                 throw new SzamlaAgentException(SzamlaAgentException::RESPONSE_TYPE_NOT_EXISTS . " ($type)");
         }
 
-        $fileName = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $agent->getRequest()->getEntity());
+        $fileName = SzamlaAgentUtil::getXmlFileName('response', $name . $postfix, $agent, $agent->getRequest()->getEntity());
         $xmlSaved = $xml->save($fileName);
 
         if (!$xmlSaved) {

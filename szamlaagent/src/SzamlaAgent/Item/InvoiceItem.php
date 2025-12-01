@@ -50,7 +50,7 @@ class InvoiceItem extends Item {
         $data['mennyiseg']        = SzamlaAgentUtil::doubleFormat($this->getQuantity());
         $data['mennyisegiEgyseg'] = $this->getQuantityUnit();
         $data['nettoEgysegar']    = SzamlaAgentUtil::doubleFormat($this->getNetUnitPrice());
-        $data['afakulcs']         = $this->getVat();
+        $data['afakulcs']         = SzamlaAgentUtil::dotCheck($this->getVat());
 
         if (SzamlaAgentUtil::isNotNull($this->getPriceGapVatBase())) {
             $data['arresAfaAlap'] = SzamlaAgentUtil::doubleFormat($this->getPriceGapVatBase());

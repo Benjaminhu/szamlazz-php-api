@@ -156,12 +156,14 @@ class SzamlaAgentUtil {
      * @return string|bool
      * @throws \ReflectionException
      */
-    public static function getXmlFileName($prefix, $name, $entity = null) {
+    public static function getXmlFileName($prefix, $name, $agent, $entity = null) {
         if (!empty($name) && !empty($entity)) {
             $name .= '-' . (new \ReflectionClass($entity))->getShortName();
         }
 
-        $fileName  = $prefix . '-' . strtolower($name) . '-' . self::getDateTimeWithMilliseconds() . '.xml';
+        $hash = $agent->getSingleton() ? '' : spl_object_hash($agent);
+
+        $fileName  = $prefix . '-' . strtolower($name) . '-' . $hash . '-' .self::getDateTimeWithMilliseconds() . '.xml';
         return self::getAbsPath(SzamlaAgent::XML_FILE_SAVE_PATH, $fileName);
     }
 

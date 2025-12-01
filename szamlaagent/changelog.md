@@ -2,7 +2,26 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-## [2.10.22] - 2025.11.13
+## [2.10.23] - 2025.11.26
+
+### Added
+
+- added function: singleton mode can be disabled
+    - src/szamlaagent/SzamlaAgentAPI.php
+        - SzamlaAgentAPI::create last parameter, default is true (singleton mode is enabled)
+        - when disabled, the SzamlaAgentAPI create method always returns a new instance
+        - when Singleton mode is disabled, the names of XML files change; hash of the SzamlaAgent instance is added to the file name
+  ````
+    SzamlaAgentAPI::create("AGENT KEY", true, Log::LOG_LEVEL_DEBUG, SzamlaAgentResponse::RESULT_AS_TEXT, "PHP API teszt", false);
+  ````
+- added function: invoice XML data download by external ID
+    - src/szamlaagent/SzamlaAgentSetting.php
+    - src/szamlaagent/SzamlaAgent.php
+    ````
+    $agent->getInvoiceData("EXTERNAL_ID", Invoice::FROM_INVOICE_EXTERNAL_ID);
+  ````
+
+## [2.10.22] - 2025.10.13
 
 ### Added
 

@@ -177,6 +177,8 @@ class SzamlaAgent {
      */
     private $certificationFilePath;
 
+    private $singleton = true;
+
     /**
      * Számla Agent létrehozása
      *
@@ -397,8 +399,10 @@ class SzamlaAgent {
 
         if ($type == Invoice::FROM_INVOICE_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
-        } else {
+        } else if($type == Invoice::FROM_ORDER_NUMBER) {
             $invoice->getHeader()->setOrderNumber($data);
+        } else {
+            $this->setInvoiceExternalId($data);
         }
 
         if ($this->getResponseType() !== SzamlaAgentResponse::RESULT_AS_XML) {
@@ -1256,4 +1260,21 @@ class SzamlaAgent {
     public function setRequestConnectTimeout($requestConnectTimeout) {
         $this->requestConnectTimeout = max($requestConnectTimeout, 0);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSingleton()
+    {
+        return $this->singleton;
+    }
+
+    /**
+     * @param mixed $singleton
+     */
+    protected function setSingleton($singleton)
+    {
+        $this->singleton = $singleton;
+    }
+
 }
