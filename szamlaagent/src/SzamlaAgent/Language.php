@@ -64,6 +64,26 @@ class Language {
     const LANGUAGE_PL = 'pl';
 
     /**
+     * bolgár nyelv
+     */
+    const LANGUAGE_BG = 'bg';
+
+    /**
+     * holland nyelv
+     */
+    const LANGUAGE_NL = 'nl';
+
+    /**
+     * orosz nyelv
+     */
+    const LANGUAGE_RU = 'ru';
+
+    /**
+     * szlovén nyelv
+     */
+    const LANGUAGE_SI = 'si';
+
+    /**
      * Számlázz.hu rendszerében használható nyelvek
      *
      * @var array
@@ -71,7 +91,8 @@ class Language {
     protected static $availableLanguages = [
         self::LANGUAGE_HU, self::LANGUAGE_EN, self::LANGUAGE_DE, self::LANGUAGE_IT,
         self::LANGUAGE_RO, self::LANGUAGE_SK, self::LANGUAGE_HR, self::LANGUAGE_FR,
-        self::LANGUAGE_ES, self::LANGUAGE_CZ, self::LANGUAGE_PL
+        self::LANGUAGE_ES, self::LANGUAGE_CZ, self::LANGUAGE_PL, self::LANGUAGE_BG,
+        self::LANGUAGE_NL, self::LANGUAGE_RU, self::LANGUAGE_SI
     ];
 
     /**

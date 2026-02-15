@@ -234,7 +234,7 @@ class SzamlaAgentRequest {
             $this->setXmlData($formatXml->saveXML());
             // Ha nincs hiba az XML-ben, elmentjük
             $agent->writeLog("XML adatok létrehozása kész.", Log::LOG_LEVEL_DEBUG);
-            if (($agent->isXmlFileSave() && $agent->isRequestXmlFileSave()) || version_compare(PHP_VERSION, '7.4.1') <= 0) {
+            if (($agent->isXmlFileSave() && $agent->isRequestXmlFileSave())) {
                 $this->createXmlFile($formatXml);
             }
         } catch (\Exception $e) {
@@ -487,7 +487,7 @@ class SzamlaAgentRequest {
             }
 
             $mimeType = 'text/xml';
-            if (($agent->isXmlFileSave() && $agent->isRequestXmlFileSave()) || version_compare(PHP_VERSION, '7.4.1') <= 0) {
+            if (($agent->isXmlFileSave() && $agent->isRequestXmlFileSave())) {
                 $xmlFile = new \CURLFile($this->getXmlFilePath(), $mimeType, basename($this->getXmlFilePath()));
             } else {
                 $xmlContent = 'data://application/octet-stream;base64,' . base64_encode($this->getXmlData());

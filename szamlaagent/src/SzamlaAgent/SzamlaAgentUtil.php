@@ -172,7 +172,7 @@ class SzamlaAgentUtil {
      * @return string
      */
     public static function getDateTimeWithMilliseconds() {
-        return date("YmdHis").substr(microtime(FALSE), 2, 5);
+        return date("YmdHis") . substr(microtime(FALSE), 2, 5);
     }
 
     /**

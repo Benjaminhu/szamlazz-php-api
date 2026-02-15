@@ -2,6 +2,19 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.11.00] - 2026.02.10
+### Added
+- added options: 
+  - src/szamlaagent/Language.php.php
+    - added 4 language constans - BG, NL, RU, SI
+- set up composer
+  - now you can install the package using composer: `composer require kboss/szamlaagent_v2`
+### Changed
+- changed directory names (because of PSR4 autolader)
+  - In the szamlaagent directory, the first letter of every folder name has been capitalized
+### Removed
+  - check PHP version before saving XML file
+
 ## [2.10.23] - 2025.11.26
 
 ### Added

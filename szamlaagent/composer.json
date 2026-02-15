@@ -1,0 +1,26 @@
+{
+    "name": "kboss/szamlaagent_v2",
+    "autoload": {
+        "psr-4": {
+            "SzamlaAgent\\": "src/szamlaagent/"
+        }
+    },
+    "support": {
+        "url" : "https://docs.szamlazz.hu/",
+        "email": "info@szamlazz.hu"
+    },
+    "authors": [
+        {
+            "name": "ladosi"
+        }
+    ],
+    "require": {
+        "php": ">=5.6 <8.5",
+        "ext-xml": "*",
+        "ext-dom": "*",
+        "ext-simplexml": "*",
+        "ext-curl": "*",
+        "ext-ctype": "*",
+        "ext-libxml": ">=2.13.0"
+    }
+}

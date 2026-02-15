@@ -1,6 +1,6 @@
 <?php
 
-namespace SzamlaAgent\CreditNote;
+namespace SzamlaAgent\Creditnote;
 
 use SzamlaAgent\Document\Document;
 use SzamlaAgent\SzamlaAgentException;
