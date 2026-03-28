@@ -2,6 +2,18 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.12.1] - 2026.03.25
+### Added
+- added function: create receipt with order number
+  - src/szamlaagent/Header/DocumentHeader.php
+  - src/szamlaagent/Header/InvoiceHeader.php
+  - src/szamlaagent/Header/ReceiptHeader.php
+    ````
+    $receipt->getHeader()->setOrderNumber("ORDER NUMBER");
+    ````
+### Fixed
+- PHP api version and release numbering
+
 ## [2.11.00] - 2026.02.10
 ### Added
 - added options: 

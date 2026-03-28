@@ -123,6 +123,13 @@ class ReceiptResponse {
      */
     protected $creditNotes;
 
+    /**
+     * Rendelésszám
+     *
+     * @var string
+     */
+    protected $orderNumber;
+
 
     /**
      * Nyugta létrehozása nyugtaszám alapján
@@ -165,6 +172,7 @@ class ReceiptResponse {
         if (isset($data['nyugta']['osszegek']))    $response->setAmounts($data['nyugta']['osszegek']);
         if (isset($data['nyugta']['kifizetesek'])) $response->setCreditNotes($data['nyugta']['kifizetesek']);
         if (isset($data['sikeres']))               $response->setSuccess(($data['sikeres'] === 'true'));
+        if (isset($base['rendelesSzam']))          $response->setOrderNumber($base['rendelesSzam']);
 
         if (isset($data['nyugtaPdf']))             $response->setPdfData($data['nyugtaPdf']);
         if (isset($data['hibakod']))               $response->setErrorCode($data['hibakod']);
@@ -456,4 +464,13 @@ class ReceiptResponse {
     protected function setReservedReceiptNumber($reservedReceiptNumber) {
         $this->reservedReceiptNumber = $reservedReceiptNumber;
     }
+
+    public function getOrderNumber() {
+        return $this->orderNumber;
+    }
+
+    public function setOrderNumber(string $orderNumber) {
+        $this->orderNumber = $orderNumber;
+    }
+
 }

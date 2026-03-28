@@ -72,6 +72,13 @@ class DocumentHeader {
      */
     protected $reverseReceipt = false;
 
+    /**
+     * Rendelésszám
+     *
+     * @var string
+     */
+    protected $orderNumber = '';
+
 
     /**
      * @return bool
@@ -204,5 +211,19 @@ class DocumentHeader {
      */
     public function setReverseReceipt($reverseReceipt) {
         $this->reverseReceipt = $reverseReceipt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOrderNumber() {
+        return $this->orderNumber;
+    }
+
+    /**
+     * @param string $orderNumber
+     */
+    public function setOrderNumber($orderNumber) {
+        $this->orderNumber = $orderNumber;
     }
 }

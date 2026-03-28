@@ -182,7 +182,7 @@ class ReceiptHeader extends DocumentHeader {
                 case $request::XML_SCHEMA_CREATE_RECEIPT:
                     $requireFields = ['prefix', 'paymentMethod', 'currency'];
                     $data = $this->buildFieldsData($request, [
-                        'hivasAzonosito', 'elotag', 'fizmod', 'penznem', 'devizabank', 'devizaarf', 'megjegyzes', 'pdfSablon', 'fokonyvVevo'
+                        'hivasAzonosito', 'elotag', 'fizmod', 'penznem', 'devizabank', 'devizaarf', 'megjegyzes', 'pdfSablon', 'fokonyvVevo', 'rendelesSzam'
                     ]);
                     break;
                 case $request::XML_SCHEMA_CREATE_REVERSE_RECEIPT:
@@ -234,6 +234,7 @@ class ReceiptHeader extends DocumentHeader {
                 case 'pdfSablon':      $value = (SzamlaAgentUtil::isNotBlank($this->getPdfTemplate())) ? $this->getPdfTemplate() : null; break;
                 case 'fokonyvVevo':    $value = (SzamlaAgentUtil::isNotBlank($this->getBuyerLedgerId())) ? $this->getBuyerLedgerId() : null; break;
                 case 'nyugtaszam':     $value = $this->getReceiptNumber(); break;
+                case 'rendelesSzam':   $value = $this->getOrderNumber(); break;
                 default:
                     throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
             }

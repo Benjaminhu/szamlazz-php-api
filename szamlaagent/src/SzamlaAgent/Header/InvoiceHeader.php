@@ -142,13 +142,6 @@ class InvoiceHeader extends DocumentHeader {
     protected $exchangeRate;
 
     /**
-     * Rendelésszám
-     *
-     * @var string
-     */
-    protected $orderNumber = '';
-
-    /**
      * Hivatkozás a díjbekérőre
      * A számla kibocsátásakor explicit megadhatjuk annak a díjbekérőnek a számát, amire hivatkozva történik a számlakibocsátás.
      *
@@ -560,20 +553,6 @@ class InvoiceHeader extends DocumentHeader {
      */
     public function setExchangeRate($exchangeRate) {
         $this->exchangeRate = (float)$exchangeRate;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOrderNumber() {
-        return $this->orderNumber;
-    }
-
-    /**
-     * @param string $orderNumber
-     */
-    public function setOrderNumber($orderNumber) {
-        $this->orderNumber = $orderNumber;
     }
 
     /**
