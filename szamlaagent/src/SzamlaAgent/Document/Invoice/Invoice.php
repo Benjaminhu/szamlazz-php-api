@@ -27,15 +27,6 @@ class Invoice extends Document {
     /** Számla típus: e-számla */
     const INVOICE_TYPE_E_INVOICE = 2;
 
-    /** Számla lekérdezése számlaszám alapján */
-    const FROM_INVOICE_NUMBER = 1;
-
-    /** Számla lekérdezése rendelési szám alapján */
-    const FROM_ORDER_NUMBER = 2;
-
-    /** Számla lekérdezése külső számlaazonosító alapján */
-    const FROM_INVOICE_EXTERNAL_ID = 3;
-
     /**
      * Jóváírások maximális száma
      * a számla kifizetettségének beállításakor

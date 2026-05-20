@@ -189,7 +189,8 @@ class ReceiptHeader extends DocumentHeader {
                     $data = $this->buildFieldsData($request, ['nyugtaszam', 'pdfSablon', 'hivasAzonosito']);
                     break;
                 case $request::XML_SCHEMA_GET_RECEIPT:
-                    $data = $this->buildFieldsData($request, ['nyugtaszam', 'pdfSablon']);
+                    $requireFields = [];
+                    $data = $this->buildFieldsData($request, ['nyugtaszam', 'pdfSablon', 'rendelesSzam']);
                     break;
                 case $request::XML_SCHEMA_SEND_RECEIPT:
                     $data = $this->buildFieldsData($request, ['nyugtaszam']);
@@ -233,8 +234,8 @@ class ReceiptHeader extends DocumentHeader {
                 case 'megjegyzes':     $value = (SzamlaAgentUtil::isNotBlank($this->getComment())) ? $this->getComment() : null; break;
                 case 'pdfSablon':      $value = (SzamlaAgentUtil::isNotBlank($this->getPdfTemplate())) ? $this->getPdfTemplate() : null; break;
                 case 'fokonyvVevo':    $value = (SzamlaAgentUtil::isNotBlank($this->getBuyerLedgerId())) ? $this->getBuyerLedgerId() : null; break;
-                case 'nyugtaszam':     $value = $this->getReceiptNumber(); break;
-                case 'rendelesSzam':   $value = $this->getOrderNumber(); break;
+                case 'nyugtaszam':     $value = (SzamlaAgentUtil::isNotBlank($this->getReceiptNumber())) ? $this->getReceiptNumber() : null; break;
+                case 'rendelesSzam':   $value = (SzamlaAgentUtil::isNotBlank($this->getOrderNumber())) ? $this->getOrderNumber() : null; break;
                 default:
                     throw new SzamlaAgentException(SzamlaAgentException::XML_KEY_NOT_EXISTS . ": {$key}");
             }

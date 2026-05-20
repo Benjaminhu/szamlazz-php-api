@@ -2,6 +2,7 @@
 
 namespace SzamlaAgent;
 
+use Exception;
 use SzamlaAgent\Document\Document;
 use SzamlaAgent\Document\DeliveryNote;
 use SzamlaAgent\Document\Proforma;
@@ -12,6 +13,7 @@ use SzamlaAgent\Document\Invoice\ReverseInvoice;
 use SzamlaAgent\Document\Invoice\CorrectiveInvoice;
 use SzamlaAgent\Document\Invoice\FinalInvoice;
 use SzamlaAgent\Document\Invoice\PrePaymentInvoice;
+use SzamlaAgent\Header\ReceiptHeader;
 use SzamlaAgent\Response\SzamlaAgentResponse;
 use SzamlaAgent\Header\DocumentHeader;
 
@@ -26,7 +28,7 @@ class SzamlaAgent {
     /**
      * Számla Agent API aktuális verzió
      */
-    const API_VERSION = '2.12.1';
+    const API_VERSION = '2.12.2';
 
     /**
      * Számla Agent API url
@@ -394,10 +396,10 @@ class SzamlaAgent {
      * @return SzamlaAgentResponse
      * @throws SzamlaAgentException
      */
-    public function getInvoiceData($data, $type = Invoice::FROM_INVOICE_NUMBER, $downloadPdf = false) {
+    public function getInvoiceData($data, $type = Invoice::FROM_DOCUMENT_NUMBER, $downloadPdf = false) {
         $invoice = new Invoice();
 
-        if ($type == Invoice::FROM_INVOICE_NUMBER) {
+        if ($type == Invoice::FROM_DOCUMENT_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
         } else if($type == Invoice::FROM_ORDER_NUMBER) {
             $invoice->getHeader()->setOrderNumber($data);
@@ -426,10 +428,10 @@ class SzamlaAgent {
      * @throws SzamlaAgentException
      * @throws \Exception
      */
-    public function getInvoicePdf($data, $type = Invoice::FROM_INVOICE_NUMBER) {
+    public function getInvoicePdf($data, $type = Invoice::FROM_DOCUMENT_NUMBER) {
         $invoice = new Invoice();
 
-        if ($type == Invoice::FROM_INVOICE_NUMBER) {
+        if ($type == Invoice::FROM_DOCUMENT_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
         } elseif ($type == Invoice::FROM_INVOICE_EXTERNAL_ID) {
             if (SzamlaAgentUtil::isBlank($data)) {
@@ -461,7 +463,7 @@ class SzamlaAgent {
             if ($result->isSuccess() && SzamlaAgentUtil::isNotBlank($result->getDocumentNumber())) {
                 return true;
             }
-        } catch (\Exception $e) {}
+        } catch (Exception $e) {}
 
         return false;
     }
@@ -469,14 +471,20 @@ class SzamlaAgent {
     /**
      * Nyugta adatok lekérdezése nyugtaszám alapján
      *
-     * @param string $receiptNumber nyugtaszám
+     * @param string $data azonosító
      *
      * @return SzamlaAgentResponse
      * @throws SzamlaAgentException
-     * @throws \Exception
      */
-    public function getReceiptData($receiptNumber) {
-        return $this->generateDocument('requestReceiptData', new Receipt($receiptNumber));
+    public function getReceiptData($data, $type = Receipt::FROM_DOCUMENT_NUMBER ) {
+        $receipt = new Receipt();
+        $receipt->setHeader(new ReceiptHeader());
+        if ($type == Receipt::FROM_DOCUMENT_NUMBER) {
+            $receipt->getHeader()->setReceiptNumber($data);
+        } else if ($type == Receipt::FROM_ORDER_NUMBER) {
+            $receipt->getHeader()->setOrderNumber($data);
+        }
+        return $this->generateDocument('requestReceiptData',$receipt);
     }
 
     /**
@@ -486,7 +494,6 @@ class SzamlaAgent {
      *
      * @return SzamlaAgentResponse
      * @throws SzamlaAgentException
-     * @throws \Exception
      */
     public function getReceiptPdf($receiptNumber) {
         return $this->generateDocument('requestReceiptPDF', new Receipt($receiptNumber));
@@ -553,10 +560,10 @@ class SzamlaAgent {
      * @throws SzamlaAgentException
      * @throws \Exception
      */
-    public function getDeleteProforma($data, $type = Proforma::FROM_INVOICE_NUMBER) {
+    public function getDeleteProforma($data, $type = Document::FROM_DOCUMENT_NUMBER) {
         $proforma = new Proforma();
 
-        if ($type == Proforma::FROM_INVOICE_NUMBER) {
+        if ($type == Document::FROM_DOCUMENT_NUMBER) {
             $proforma->getHeader()->setInvoiceNumber($data);
         } else {
             $proforma->getHeader()->setOrderNumber($data);

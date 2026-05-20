@@ -13,16 +13,6 @@ use SzamlaAgent\Header\ProformaHeader;
 class Proforma extends Invoice {
 
     /**
-     * Díjbekérő számlaszám alapján
-     */
-    const FROM_INVOICE_NUMBER = 1;
-
-    /**
-     * Díjbekérő rendelésszám alapján
-     */
-    const FROM_ORDER_NUMBER = 2;
-
-    /**
      * Díjbekérő létrehozása
      *
      * @throws \Exception

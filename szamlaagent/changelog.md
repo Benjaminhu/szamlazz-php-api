@@ -2,6 +2,21 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.12.2] - 2026.04.08
+### Added
+- added function: get receipt information and pdf by order number
+  - src/szamlaagent/Document/Document.php
+  - src/szamlaagent/Document/Proforma.php
+  - src/szamlaagent/Document/Invoice/Invoice.php
+  - src/szamlaagent/Document/Header/ReceiptHeader.php
+  - src/szamlaagent/SzamlaAgent.php
+    ````
+    $agent->getReceipt("ORDER NUMBER", Document::FROM_ORDER_NUMBER);
+    ````
+### Changed
+- updated checkValidXml method
+  - src/szamlaagent/SzamlaAgentUtil.php
+
 ## [2.12.1] - 2026.03.25
 ### Added
 - added function: create receipt with order number
@@ -10,7 +25,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
   - src/szamlaagent/Header/ReceiptHeader.php
     ````
     $receipt->getHeader()->setOrderNumber("ORDER NUMBER");
-    ````
+    ````**
 ### Fixed
 - PHP api version and release numbering
 

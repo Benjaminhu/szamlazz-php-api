@@ -5,6 +5,7 @@
  */
 require __DIR__ . '/../../autoload.php';
 
+use SzamlaAgent\Document\Receipt\Receipt;
 use \SzamlaAgent\SzamlaAgentAPI;
 
 try {
@@ -12,7 +13,7 @@ try {
     $agent = SzamlaAgentAPI::create('agentApiKey', false);
 
     // Nyugta adatok lekérdezése nyugtaszám alapján
-    $result = $agent->getReceiptData('NYGTA-2021-001');
+    $result = $agent->getReceiptData('NYGTA-2021-001', Receipt::FROM_DOCUMENT_NUMBER);
 
     // Agent válasz sikerességének ellenőrzése
     if ($result->isSuccess()) {
