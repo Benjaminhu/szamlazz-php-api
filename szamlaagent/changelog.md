@@ -2,6 +2,13 @@
 All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [2.12.3] - 2026.05.20
+### Fixed
+- external id bugfix
+  - src/szamlaagent/SzamlaAgent.php
+- examples autoloader fix
+  - examples/autoload.php 
+
 ## [2.12.2] - 2026.04.08
 ### Added
 - added function: get receipt information and pdf by order number

@@ -28,7 +28,7 @@ class SzamlaAgent {
     /**
      * Számla Agent API aktuális verzió
      */
-    const API_VERSION = '2.12.2';
+    const API_VERSION = '2.12.3';
 
     /**
      * Számla Agent API url
@@ -398,6 +398,7 @@ class SzamlaAgent {
      */
     public function getInvoiceData($data, $type = Invoice::FROM_DOCUMENT_NUMBER, $downloadPdf = false) {
         $invoice = new Invoice();
+        $this->getSetting()->setInvoiceExternalId(null);
 
         if ($type == Invoice::FROM_DOCUMENT_NUMBER) {
             $invoice->getHeader()->setInvoiceNumber($data);
